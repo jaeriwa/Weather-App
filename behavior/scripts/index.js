@@ -69,7 +69,7 @@ exports.handle = function handle(client) {
     client.done()
   }
 })
-  const handleGoodbye = client.createStep ({
+  const handleGoodbye = client.createStep({
     satisfield(){
       return false
     },
