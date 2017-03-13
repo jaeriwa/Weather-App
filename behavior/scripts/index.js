@@ -60,25 +60,26 @@ exports.handle = function handle(client) {
   })
 
   const handleGreeting = client.createStep({
-  satisfied() {
-    return false
-  },
-
-  prompt() {
-    client.addResponse('greeting')
-    client.done()
-  }
-})
-  const handleGoodbye = client.createStep({
-    satisfield(){
+    satisfied() {
       return false
     },
 
-  prompt(){
-    client.addResponse('goodbye')
-    client.done()
-  }
-})
+    prompt() {
+      client.addResponse('greeting')
+      client.done()
+    }
+  })
+
+  const handleGoodbye = client.createStep({
+    satisfied() {
+      return false
+    },
+
+    prompt() {
+      client.addResponse('goodbye')
+     client.done()
+    }
+  })
 
   client.runFlow({
     classifications: {
