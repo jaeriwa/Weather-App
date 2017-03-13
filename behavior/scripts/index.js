@@ -58,7 +58,16 @@ exports.handle = function handle(client) {
       })
     },
   })
+  const untrained = client.createStep({
+    satisfied() {
+      return false
+    },
 
+    prompt() {
+      client.addResponse('apology/untrained')
+      client.done()
+    }
+  })
   const handleGreeting = client.createStep({
     satisfied() {
       return false
@@ -84,12 +93,16 @@ exports.handle = function handle(client) {
   client.runFlow({
     classifications: {
       goodbye: 'goodbye',
-      greeting: 'greeting'
+      greeting: 'greeting',
+      weather_city: 'weather_city',
+      provide_weather: 'provide_weather'
     },
     streams: {
       goodbye: handleGoodbye,
       greeting: handleGreeting,
-      main: 'getWeather',
+      weather_city: collectCity,
+      provide_weather: provideWeather,
+      main: 'onboarding',
       getWeather: [collectCity, provideWeather],
     }
   })
